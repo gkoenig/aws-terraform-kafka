@@ -3,5 +3,4 @@ module "vpc" {
 	vpc_cidr="${var.vpc_cidr}"
 	domain="${var.domain}"
 	name="${var.name}"
-	centos="${var.centos}"
 }
