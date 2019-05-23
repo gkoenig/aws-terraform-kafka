@@ -1,12 +1,12 @@
 provider "aws" {
-  region = "eu-central-1"
+  region = "eu-west-3"
 }
 
 terraform {
   backend "s3" {
-    bucket = "terraform.{{env}}.{{ aws.domain }}some.domain"
-    key    = "{{env}}/{{build}}/terraform.tfstate"
-    region = "eu-central-1"
+    bucket = "terraform-kafka.development.scigility"
+    key    = "development/vpc/terraform.tfstate"
+    region = "eu-west-3"
     encrypt = true
   }
 }

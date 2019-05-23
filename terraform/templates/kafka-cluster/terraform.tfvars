@@ -13,5 +13,5 @@ kafka-disksize=50
 kafka-disktype="st1"
 
 # VPC state location
-vpc_state_bucket = "terraform.{{env}}.{{aws.domain}}"
-vpc_state_key    = "{{env}}/vpc/terraform.tfstate"
+vpc_state_bucket = "terraform.development.scigility"
+vpc_state_key    = "development/vpc/terraform.tfstate"
