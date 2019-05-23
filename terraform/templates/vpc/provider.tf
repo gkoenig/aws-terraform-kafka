@@ -4,7 +4,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "terraform.{{env}}.{{ aws.domain }}"
+    bucket = "terraform-kafka.{{env}}.{{ aws.domain }}"
     key    = "{{env}}/vpc/terraform.tfstate"
     region = "eu-west-3"
     encrypt = true
