@@ -2,7 +2,7 @@ resource "aws_instance" "bastion" {
   count                       = 1
   ami                         = "ami-bfff49c2"
   instance_type               = "t2.micro"
-  key_name                    = "${file("~/.ssh/kafka-${var.env}.pem")}"
+  key_name                    = "${file("~/.ssh/${var.keyname}")}"
   subnet_id                   = "${element(aws_subnet.public.*.id, count.index)}"
   vpc_security_group_ids      = ["${aws_security_group.bastion.id}"]
   associate_public_ip_address = true

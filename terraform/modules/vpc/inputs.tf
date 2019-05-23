@@ -18,9 +18,7 @@ variable "cidr_all" {
 }
 
 variable "keyname" {
-  default = "kafka"
+  default = "kafka-development.pem"
 }
 
 variable "domain" {}
-
-variable "env" {}
