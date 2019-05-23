@@ -18,7 +18,7 @@ variable "cidr_all" {
 }
 
 variable "keyname" {
-  default = "gk-paris.pem"
+  default = "gk-paris"
 }
 
 variable "domain" {}
