@@ -9,7 +9,7 @@ resource "aws_subnet" "public" {
   cidr_block        = "${cidrsubnet(var.vpc_cidr,8,250+count.index)}"
   availability_zone = "${element(data.aws_availability_zones.all.names, 1)}"
 
-  tags {
+  tags = {
     Name = "public.kafka.${var.domain}"
   }
 
@@ -30,7 +30,7 @@ resource "aws_route_table" "public" {
     gateway_id = "${aws_internet_gateway.public.id}"
   }
 
-  tags {
+  tags = {
     Name = "igw.kafka.${var.domain}"
   }
 }

@@ -7,7 +7,7 @@ resource "aws_security_group" "bastion" {
   description = "External Security Group"
   vpc_id      = "${aws_vpc.main.id}"
 
-  tags {
+  tags = {
     Name = "bastion.kafka.${var.domain}"
   }
 }

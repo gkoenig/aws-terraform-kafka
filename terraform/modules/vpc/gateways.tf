@@ -4,7 +4,7 @@
 resource "aws_internet_gateway" "public" {
   vpc_id = "${aws_vpc.main.id}"
 
-  tags {
+  tags = {
     Name = "${var.name}-igw.${var.domain}"
   }
 }

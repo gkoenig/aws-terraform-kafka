@@ -13,7 +13,7 @@ resource "aws_instance" "bastion" {
     delete_on_termination = true
   }
 
-  tags {
+  tags = {
     Name = "bastion-kafka.${var.name}.${var.domain}"
   }
 }
