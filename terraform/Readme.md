@@ -35,6 +35,7 @@ This modules creates a VPC to host one or more Clusters
     └── vpc.tf                  # VPC creation
 ```
 ### How to create a new VPC
+Hint: the S3 bucket needs to exist upfront!
 
 #### Create VPC for an Environment - with Ansible
 
@@ -47,21 +48,16 @@ ansible-playbook playbook.yml
 
 Answer to the questions:
 ```
-Environemt [integration|production]: integration
-Deployment ID [dev-00|test-00|prod|repl|...]: dev-01
+Environment : development
+Deployment ID : dev-00
 ```  
 
 This will create the deployments directories as:
 ```
 deployments
-├── integration
+├── development
 │   ├── dev-00
-│   ├── test-00
 │   └── vpc
-└── production
-    ├── prod
-    ├── repl
-    └── vpc
 ``` 
 
 For the environment, integration or production, if the VPC still does not exists, it will create  it.
