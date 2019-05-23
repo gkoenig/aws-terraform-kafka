@@ -1,10 +1,6 @@
 .DS_Store
 /.prerequisites.lock
-/deployment/*.retry
-/deployment/vars/**/credentials.yaml
-/deployment/vars/cluster/integration/auth
-/deployment/vars/cluster/integration/salesforce.sh
-/deployment/vars/cluster/integration/salesforce.yaml
+/deployments
 /scripts/_config
 terraform.state*
 .terraform
