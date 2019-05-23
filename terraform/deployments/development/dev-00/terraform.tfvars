@@ -3,7 +3,7 @@ stack_offset=0
 
 # Environment Name [dev-00, dev-01   or test-00, test-01]
 env="dev-00"
-domain="development.scigility"
+domain="scigility"
 
 
 # Define Kafka EC2 Instance and Disk Sizes
