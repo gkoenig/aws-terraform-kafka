@@ -1,6 +1,5 @@
 .DS_Store
 /.prerequisites.lock
-/deployments
 /scripts/_config
 terraform.state*
 .terraform
