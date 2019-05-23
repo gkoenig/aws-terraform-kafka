@@ -1,0 +1,66 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_prompt:
+    - name: "env"
+      prompt: "Environment , e.g. 'development'"
+      private: no
+    - name: "build"
+      prompt: "Deployment ID , e.g. 'develop-00'"
+      private: no
+
+  tasks:
+  - name: Include vars
+    include_vars:
+      file: "{{env}}.yml"
+      name: aws
+  - name: ensure dir ./deployments/{{ env }}/vpc exists
+    file:
+      path: ./deployments/{{env}}/vpc
+      state: directory
+      mode: 0775
+
+  - name: Create VPC Deploy directory - ./deployments/{{env}}/vpc
+    synchronize:
+      src: ./templates/vpc/
+      dest: ./deployments/{{env}}/vpc
+
+
+  - name: Create Deploy directory - ./deployments/{{env}}/{{build}}
+    synchronize:
+      src: ./templates/kafka-cluster/
+      dest: ./deployments/{{env}}/{{build}}
+
+  - name: Define State Bucket and key for VPC - ./deployments/{{env}}/vpc/provider.tf
+    template:
+      src: ./templates/vpc/provider.tf
+      dest: ./deployments/{{env}}/vpc/provider.tf
+
+  - name: terraform.tfvars - VPC - ./deployments/{{env}}/vpc/terraform.tfvars
+    template:
+      src: ./templates/vpc/terraform.tfvars
+      dest: ./deployments/{{env}}/vpc/terraform.tfvars
+
+  - name: Define State Bucket and key for Kafka Cluster - ./deployments/{{env}}/{{build}}/provider.tf
+    template:
+      src: ./templates/kafka-cluster/provider.tf
+      dest: ./deployments/{{env}}/{{build}}/provider.tf
+
+  - name: terraform.tfvars - KAFKA ./deployments/{{env}}/{{build}}/terraform.tfvars
+    template:
+      src: ./templates/kafka-cluster/terraform.tfvars
+      dest: ./deployments/{{env}}/{{build}}/terraform.tfvars
+
+  - name: initialize terraform for VPC
+    command: terraform init
+    args:
+      chdir: ./deployments/{{env}}/vpc/
+      creates: ./deployments/{{env}}/vpc/.terraform
+
+  - name: initialize terraform for Kafka cluster {{build}}
+    command: terraform init
+    args:
+      chdir: ./deployments/{{env}}/{{build}}/
+      creates: ./deployments/{{env}}/{{build}}/.terraform
+

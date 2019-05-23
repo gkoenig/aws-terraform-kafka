@@ -1,0 +1,5 @@
+---
+domain: aws-0144
+dns: integration
+name: "{{build}}"
+vpc_peer: vpc-88c0bde0

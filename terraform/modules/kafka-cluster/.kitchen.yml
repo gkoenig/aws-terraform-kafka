@@ -1,0 +1,30 @@
+---
+driver:
+    name: terraform
+    variable_files:
+        - terraform.tfvars.test
+
+provisioner:
+    name: terraform
+
+platforms:
+    - name: centos
+
+transport:
+    name: ssh
+    ssh_key: ~/.ssh/tedd-kafka-integration.pem
+    ssh_gateway: ec2-52-29-203-105.eu-central-1.compute.amazonaws.com
+    ssh_gateway_username: centos
+
+verifier:
+    name: terraform
+    format: doc
+    groups:
+        - name: default
+          controls:
+            - operating_system
+          hostnames: zookeeper_fqdn_dns
+          username: centos
+suites:
+    - name: default           
+

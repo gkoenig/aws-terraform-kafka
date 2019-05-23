@@ -1,0 +1,39 @@
+{
+  "variables": {
+    "AWS_ACCESS_KEY": "",
+    "AWS_SECRET_KEY": "",
+    "REGION": "eu-central-1",
+    "VPC": "",
+    "SUBNET": "",
+    "SOURCE_AMI": ""
+  },
+
+"builders": [{
+  "type": "amazon-ebs",
+  "access_key": "{{user `AWS_ACCESS_KEY`}}",
+  "secret_key": "{{user `AWS_SECRET_KEY`}}",
+  "region": "{{user `REGION`}}",
+  "source_ami": "{{user `SOURCE_AMI`}}",
+  "instance_type": "t2.micro",
+  "subnet_id": "{{user `SUBNET`}}",
+  "vpc_id": "{{user `VPC`}}",
+  "ssh_username": "centos",
+  "encrypt_boot": "true",
+  "ami_description": "CentOS 7 Kafka @ITERGO, {{timestamp}}",
+  "ami_name": "centos-kafka-ITERGO-{{timestamp}}",
+  "tags": {
+    "OS": "CentOS 7",
+    "Confluent OSS": "confluent-platform-oss-2.11",
+    "Kafka Version": "3.3"
+  }
+}],
+  "provisioners": [
+   {
+      "type": "shell",
+      "only": ["amazon-ebs"],
+      "scripts": [
+            "scripts/install.sh"
+          ]
+   }]
+}
+}

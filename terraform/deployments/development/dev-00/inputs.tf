@@ -1,0 +1,9 @@
+variable "stack_offset" {}
+variable "env" {}
+variable "domain" {}
+variable "kafka_ec2_type" {}
+variable "ami" {}
+variable "kafka-disksize" {}
+variable "kafka-disktype" {}
+variable "vpc_state_bucket" {}
+variable "vpc_state_key" {}

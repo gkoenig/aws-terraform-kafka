@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<ul>
+		{{range .items -}}
+			{{- /* ingress */ -}}
+			{{- if .spec.rules -}}
+				{{- range .spec.rules -}}
+					{{ $currentHost := .host }}
+					{{- if .http.paths -}}
+						{{- range .http.paths -}}
+							{{if ne .path "/.well-known/acme-challenge"}}<li><a href="https://{{$currentHost}}{{.path}}">{{.backend.serviceName}}</a></li>{{ printf "\n\t\t"}}{{end}}
+						{{- end -}}
+					{{- end -}}
+				{{- end -}}
+			{{- end -}}
+
+			{{- /* services */ -}}
+			{{- if .status.loadBalancer -}}
+				{{ $currentName := .metadata.name }}
+				{{- range .status.loadBalancer.ingress}}
+					{{- if .hostname}}<li><a href="https://{{.hostname}}/">{{$currentName}}</a></li>{{ printf "\n\t\t"}}{{end}}
+				{{- end -}}
+			{{- end -}}
+		{{- end}}
+	</ul>
+</body>
+</html>

@@ -1,0 +1,16 @@
+.DS_Store
+/.prerequisites.lock
+/deployment/*.retry
+/deployment/vars/**/credentials.yaml
+/deployment/vars/cluster/integration/auth
+/deployment/vars/cluster/integration/salesforce.sh
+/deployment/vars/cluster/integration/salesforce.yaml
+/scripts/_config
+terraform.state*
+.terraform
+terraform/plugins
+.vscode
+deployment/vault_pass.txt
+.idea
+*.plan
+*.code-workspace

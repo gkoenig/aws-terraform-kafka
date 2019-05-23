@@ -1,0 +1,25 @@
+{
+  "name": "s3-sink-role",
+    "config": {
+      "name":"s3-sink-role",
+      "connector.class":"io.confluent.connect.s3.S3SinkConnector",
+      "tasks.max":"10",
+      "topics":"role,role_error,role_invalid",
+      "s3.ssea.name":"AES256",
+      "s3.region":"eu-central-1",
+      "s3.bucket.name":"kafka-s3-sink.${ENV}.${DOMAIN}",
+      "s3.part.size":"5242880",
+      "flush.size":"1000",
+      "key.converter":"org.apache.kafka.connect.storage.StringConverter",
+      "value.converter":"org.apache.kafka.connect.storage.StringConverter",
+      "key.converter.schemas.enable":"false",
+      "value.converter.schemas.enable":"false",
+      "storage.class":"io.confluent.connect.s3.storage.S3Storage",
+      "format.class":"io.confluent.connect.s3.format.json.JsonFormat",
+      "schema.generator.class":"io.confluent.connect.storage.hive.schema.DefaultSchemaGenerator",
+      "partitioner.class":"io.confluent.connect.storage.partitioner.DefaultPartitioner",
+      "schema.compatibility":"NONE",
+      "security.protocol":"SASL_PLAINTEXT",
+      "sasl.mechanism":"PLAIN"
+    }
+}

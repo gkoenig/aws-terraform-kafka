@@ -1,0 +1,46 @@
+{{/*
+   * Creates a CSV file with the following properties:
+   * Service,ProbeName,ProbeURL,ProxyUmgebung,ContentMatchString,AuthenticationType
+   *
+   * Service,
+   * ProbeName            Must contain ONLY upper- and lowercase characters,
+   *                      numbers, periods or underscores.
+   * ProbeURL             Health probe URL
+   * ProxyUmgebung        Valid values: "ergodev" or "ergo"
+   * ContentMatchString   String in the health probe response, defining it as "up"
+   * AuthenticationType   Valid values: "None" or "Basic"
+   *
+   * Adjust the variables for your project:
+   */ -}}
+
+
+{{- $projectName := "crm360" -}}
+{{- $healthEndpoint := "health" -}}
+{{- $proxy := "ergodev" -}}
+{{- $contentMatchingString := "ok" -}}
+{{- $authType := "Basic" -}}
+
+
+{{- range .items -}}
+
+	{{- /* ingress */ -}}
+	{{- range .spec.rules -}}
+		{{$currentHost := .host}}
+		{{- range .http.paths -}}
+			{{- if ne .path "/.well-known/acme-challenge" -}}
+				{{$projectName}},{{.backend.serviceName}},https://{{$currentHost}}{{.path}}{{$healthEndpoint}},{{$proxy}},{{$contentMatchingString}},{{$authType}}{{ printf "\n"}}
+			{{- end -}}
+		{{- end -}}
+	{{- end -}}
+
+	{{- /* services */ -}}
+	{{- if .status.loadBalancer -}}
+		{{ $currentName := .metadata.name }}
+		{{- range .status.loadBalancer.ingress -}}
+			{{- if .hostname -}}
+				{{$projectName}},{{$currentName}},https://{{.hostname}}/{{$healthEndpoint}},{{$proxy}},{{$contentMatchingString}},{{$authType}}{{ printf "\n"}}
+			{{- end -}}
+		{{- end -}}
+	{{- end -}}
+
+{{- end -}}

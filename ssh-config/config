@@ -1,0 +1,64 @@
+Host bastion-devops-k8s
+  Hostname bastion.devops.some.domain
+  User admin
+  IdentityFile ~/.ssh/devops_rsa
+  ForwardAgent yes
+  AddKeysToAgent yes
+  IdentitiesOnly yes
+  StrictHostKeyChecking no
+
+Host bastion-integration-k8s
+  Hostname bastion.integration.some.domain
+  User admin
+  IdentityFile ~/.ssh/integration_rsa
+  ForwardAgent yes
+  AddKeysToAgent yes
+  IdentitiesOnly yes
+  StrictHostKeyChecking no
+
+Host bastion-integration-kafka
+  Hostname ec2-52-57-246-157.eu-central-1.compute.amazonaws.com
+  User centos
+  IdentityFile ~/.ssh/kafka-integration.pem
+  AddKeysToAgent yes
+  ForwardAgent yes
+  IdentitiesOnly yes
+  StrictHostKeyChecking no
+
+Host kafka.dev
+  Hostname kafka.dev-00.integration.some.domain
+  User centos
+  ProxyCommand ssh -q -W %h:%p bastion-integration-kafka
+
+Host zk-?.dev
+  Hostname %h.integration.some.domain
+  User centos
+  ProxyCommand ssh -q -W %h:%p bastion-integration-kafka
+
+Host kafka-?.test zk-?.test
+  Hostname %h.integration.some.domain
+  User centos
+  ProxyCommand ssh -q -W %h:%p bastion-integration-kafka
+
+Host bastion-prod-k8s
+  Hostname bastion.some.domain
+  User admin
+  IdentityFile ~/.ssh/prod_rsa
+  AddKeysToAgent yes
+  ForwardAgent yes
+  IdentitiesOnly yes
+  StrictHostKeyChecking ask
+
+Host bastion-prod-kafka
+  Hostname ec2-18-195-109-188.eu-central-1.compute.amazonaws.com
+  User centos
+  IdentityFile ~/.ssh/kafka-prod.pem
+  AddKeysToAgent yes
+  ForwardAgent yes
+  IdentitiesOnly yes
+  StrictHostKeyChecking ask
+
+Host kafka-?.prod zk-?.prod
+  Hostname %h.some.domain
+  User centos
+  ProxyCommand ssh -q -W %h:%p bastion-prod-kafka

@@ -1,0 +1,4 @@
+---
+domain: scigility
+dns: dev
+name: "{{build}}"

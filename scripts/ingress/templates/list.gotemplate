@@ -1,0 +1,20 @@
+{{- range .items -}}
+	{{- /* ingress */ -}}
+	{{- if .spec.rules -}}
+		{{- range .spec.rules -}}
+			{{ $currentHost := .host }}
+			{{- if .http.paths -}}
+				{{- range .http.paths -}}
+					{{if ne .path "/.well-known/acme-challenge"}}{{$currentHost}}{{.path | printf "%s\n"}}{{end}}
+				{{- end -}}
+			{{- end -}}
+		{{- end -}}
+	{{- end -}}
+
+	{{- /* services */ -}}
+	{{- if .status.loadBalancer -}}
+		{{- range .status.loadBalancer.ingress}}
+			{{- if .hostname}}{{.hostname | printf "%s/\n"}}{{end -}}
+		{{- end -}}
+	{{- end -}}
+{{- end -}}

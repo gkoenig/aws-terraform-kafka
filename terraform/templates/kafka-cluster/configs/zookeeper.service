@@ -1,0 +1,22 @@
+[Unit]
+Description=Apache Zookeeper server
+Documentation=http://zookeeper.apache.org
+Requires=network.target remote-fs.target
+After=network.target remote-fs.target
+
+[Service]
+Type=simple
+User=zookeeper
+SyslogIdentifier=zookeeper
+Restart=always
+RestartSec=0s
+Group=zookeeper
+Environment="KAFKA_OPTS=-javaagent:/zookeeper/prometheus/jmx_prometheus_javaagent-0.6.jar=7071:/zookeeper/etc/zookeeper-prometheus.yml -Djava.security.auth.login.config=/zookeeper/etc/zk-plain-jaas.conf"
+Environment="KAFKA_JMX_OPTS=-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=8989 -Djava.rmi.server.hostname=zk-${ZK_ID}.${ENV}.${DOMAIN}"
+ExecStart=/usr/bin/zookeeper-server-start /zookeeper/etc/zookeeper.properties
+ExecStop=/usr/bin/zookeeper-server-stop
+ExecReload=/usr/bin/zookeeper-server-stop && /usr/bin/zookeeper-server-start /zookeeper/etc/zookeeper.properties
+WorkingDirectory=/zookeeper
+
+[Install]
+WantedBy=multi-user.target
