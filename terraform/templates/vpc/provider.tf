@@ -20,7 +20,7 @@ resource "aws_s3_bucket" "terraform-state-storage-s3" {
 
 terraform {
   backend "s3" {
-    bucket = "terraform-kafka.{{env}}.{{ domain }}"
+    bucket = "terraform-kafka.{{env}}.{{ aws.domain }}"
     key    = "{{env}}/vpc/terraform.tfstate"
     region = "eu-west-3"
     encrypt = true
