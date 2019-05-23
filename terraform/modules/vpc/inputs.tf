@@ -22,3 +22,5 @@ variable "keyname" {
 }
 
 variable "domain" {}
+
+variable "env" {}
