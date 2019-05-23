@@ -24,10 +24,10 @@ resource "null_resource" "kafka" {
   connection {
     user = "${var.ssh_user}"
     host = "${element(aws_instance.kafka.*.private_ip, count.index)}"
-    private_key  = "${file("~/.ssh/kafka-${var.env}.pem")}"
+    private_key  = "${file("~/.ssh/gk-paris.pem")}"
     bastion_user = "${var.bastion_user}"
     bastion_host = "${data.terraform_remote_state.main.bastion_dns}"
-    bastion_private_key = "${file("~/.ssh/kafka-${var.env}.pem")}"
+    bastion_private_key = "${file("~/.ssh/gk-paris.pem")}"
     agent = false
   }
 
@@ -90,10 +90,10 @@ resource "null_resource" "kafka-service" {
   connection {
     user = "${var.ssh_user}"
     host = "${element(aws_instance.kafka.*.private_ip, count.index)}"
-    private_key  = "${file("~/.ssh/kafka-${var.env}.pem")}"
+    private_key  = "${file("~/.ssh/gk-paris.pem")}"
     bastion_user = "${var.bastion_user}"
     bastion_host = "${data.terraform_remote_state.main.bastion_dns}"
-    bastion_private_key = "${file("~/.ssh/kafka-${var.env}.pem")}"
+    bastion_private_key = "${file("~/.ssh/gk-paris.pem")}"
     agent = false
   }
 
@@ -139,10 +139,10 @@ resource "null_resource" "rest_proxy" {
   connection {
     user = "${var.ssh_user}"
     host = "${element(aws_instance.kafka.*.private_ip, count.index)}"
-    private_key  = "${file("~/.ssh/kafka-${var.env}.pem")}"
+    private_key  = "${file("~/.ssh/gk-paris.pem")}"
    bastion_user = "${var.bastion_user}"
     bastion_host = "${data.terraform_remote_state.main.bastion_dns}"
-    bastion_private_key = "${file("~/.ssh/kafka-${var.env}.pem")}"
+    bastion_private_key = "${file("~/.ssh/gk-paris.pem")}"
     agent = false
   }
   provisioner "file" {
