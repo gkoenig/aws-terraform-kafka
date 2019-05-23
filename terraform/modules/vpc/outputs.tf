@@ -7,17 +7,17 @@ output "natgw_id" {
 }
 
 output "subnet_public" {
-  value = "${aws_subnet.public.id[count.index]}"
+  value = "${aws_subnet.public.id}"
 }
 
 output "bastion_dns" {
-  value = "${aws_instance.bastion[count.index].public_dns}"
+  value = "${aws_instance.bastion.public_dns}"
 }
 
 output "bastion_ip" {
-  value = "${aws_instance.bastion[count.index].public_ip}"
+  value = "${aws_instance.bastion.public_ip}"
 }
 
 output "bastion_ip_priv" {
-  value = "${aws_instance.bastion[count.index].private_ip}"
+  value = "${aws_instance.bastion.private_ip}"
 }
