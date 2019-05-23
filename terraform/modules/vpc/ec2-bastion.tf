@@ -1,6 +1,6 @@
 resource "aws_instance" "bastion" {
   count                       = 1
-  ami                         = "${lookup(var.centos_ami, var.name)}"
+  ami                         = "ami-bfff49c2"
   instance_type               = "t2.micro"
   key_name                    = "kafka"
   subnet_id                   = "${element(aws_subnet.public.*.id, count.index)}"

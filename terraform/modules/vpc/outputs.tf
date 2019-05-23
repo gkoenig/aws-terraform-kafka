@@ -2,10 +2,6 @@ output "vpc_id" {
   value = "${aws_vpc.main.id}"
 }
 
-output "vpc_peer_id" {
-  value = "${var.vpc_peer}"
-}
-
 output "natgw_id" {
   value = "${aws_nat_gateway.natgw.id}"
 }
@@ -24,9 +20,5 @@ output "bastion_ip" {
 
 output "bastion_ip_priv" {
   value = "${aws_instance.bastion.private_ip}"
-}
-
-output "peering_connection_id" {
-  value = "${aws_vpc_peering_connection.pc.id}"
 }
 
