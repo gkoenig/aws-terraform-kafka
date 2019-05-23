@@ -65,7 +65,7 @@ resource "null_resource" "kafka" {
   provisioner "remote-exec" {
     inline = [
       "sudo rsync -av -b /tmp/terraform/ /kafka/",
-      "sudo chown -R kafka /kafka", 
+      "sudo chown -R kafka /kafka",
       "sudo rm -rf /tmp/terraform"
     ]
   }
@@ -84,7 +84,7 @@ resource "null_resource" "kafka-service" {
 
   count    = "${var.nr_kafka_nodes}"
   triggers {
-    server_id = "${element(aws_instance.kafka.*.id, count.index)}",
+    server_id = "${element(aws_instance.kafka.*.id, count.index)}"
     kafka_service_cfg = "${sha1(file("configs/kafka.service"))}"
   }
   connection {

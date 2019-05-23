@@ -74,10 +74,10 @@ resource "null_resource" "s3connectors" {
   count = "${var.s3sink ? var.nr_kafka_nodes : 0}"
 
   triggers {
-    agency-sink = "${sha1(data.template_file.s3-sink-agency.rendered)}",
-    contract-sink = "${sha1(data.template_file.s3-sink-contract.rendered)}",
-    mm-test-sink = "${sha1(data.template_file.s3-sink-mm-test.rendered)}",
-    party-sink = "${sha1(data.template_file.s3-sink-party.rendered)}",
+    agency-sink = "${sha1(data.template_file.s3-sink-agency.rendered)}"
+    contract-sink = "${sha1(data.template_file.s3-sink-contract.rendered)}"
+    mm-test-sink = "${sha1(data.template_file.s3-sink-mm-test.rendered)}"
+    party-sink = "${sha1(data.template_file.s3-sink-party.rendered)}"
     role-sink = "${sha1(data.template_file.s3-sink-role.rendered)}"
   }
   connection {
@@ -126,9 +126,9 @@ resource "null_resource" "kafkaconnect" {
 
   count    = "${var.nr_kafka_nodes}"
   triggers {
-    con-standalone = "${sha1(data.template_file.connect-distributed.rendered)}",
-    con-distributed = "${sha1(data.template_file.connect-standalone.rendered)}",
-    con-s3-sink = "${sha1(data.template_file.connect-standalone-s3-sink.rendered)}",
+    con-standalone = "${sha1(data.template_file.connect-distributed.rendered)}"
+    con-distributed = "${sha1(data.template_file.connect-standalone.rendered)}"
+    con-s3-sink = "${sha1(data.template_file.connect-standalone-s3-sink.rendered)}"
     con-log4j-file = "${sha1(file("configs/connect-distributed-log4j.properties"))}"
   }
   connection {
