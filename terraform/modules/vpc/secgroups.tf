@@ -31,3 +31,12 @@ resource "aws_security_group_rule" "bastion_allow_all_out" {
   cidr_blocks       = ["0.0.0.0/0"]
   type              = "egress"
 }
+
+resource "aws_security_group_rule" "bastion_allow_ssh" {
+  security_group_id = "${aws_security_group.bastion.id}"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "-1"
+  cidr_blocks       = ["0.0.0.0/0"]
+  type              = "ingress"
+}
