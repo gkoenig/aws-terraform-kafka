@@ -3,7 +3,7 @@
 ################################################################################
 resource "aws_subnet" "main" {
   count                   = "${length(data.aws_availability_zones.all.names)}"
-  vpc_id                  = "${data.terraform_remote_state.main.vpc_id}"
+  vpc_id                  = "${data.aws_vpc.main.id}"
   cidr_block              = "${cidrsubnet(data.aws_vpc.main.cidr_block, 8, length(data.aws_availability_zones.all.names) * var.stack_offset + count.index)}"
   availability_zone       = "${element(data.aws_availability_zones.all.names, count.index)}"
   map_public_ip_on_launch = false

@@ -15,10 +15,9 @@ data "terraform_remote_state" "main" {
 }
 
 data "aws_vpc" "main" {
-  id = "${data.terraform_remote_state.main.vpc_id}"
+  tags {
+    Name = "kafka.scigility"
+  }
 }
 
-data "aws_vpc" "peer" {
-  id = "${data.terraform_remote_state.main.vpc_peer_id}"
-}
 
