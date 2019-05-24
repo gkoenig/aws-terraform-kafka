@@ -22,7 +22,3 @@ output "zookeeper_private_dns" {
 output "zookeeper_fqdn_dns" {
   value = ["${aws_route53_record.zookeeper.*.fqdn}"]
 }
-
-output "s3-sink-bucket" {
-   value = "${join(" ",aws_s3_bucket.kafka_s3_bucket.*.bucket)}"
-}

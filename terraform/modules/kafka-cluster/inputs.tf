@@ -24,11 +24,6 @@ variable "mirrormaker" {
   default = false
 }
 
-variable "s3sink" {
-  default = false
-}
-
-
 variable "ami" {
 }
 
@@ -55,7 +50,7 @@ variable "prevent_destroy_ebs" {
    default =   "true"
 }
 
-variable "ssh_user" { 
+variable "ssh_user" {
   default = "centos"
 }
 variable "bastion_user" {

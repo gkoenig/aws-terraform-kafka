@@ -107,17 +107,7 @@ domain="some.domain"
 name="integration"
 ```
 
-Change on _provider.tf_ the S3 bucket and key where terraform state is going to be stored on S3:
-```
-terraform {
-  backend "s3" {
-    bucket = "terraform.integration.some.domain"
-    key    = "integration/vpc/terraform.tfstate"
-    region = "eu-central-1"
-    encrypt = true
-  }
-}
-```
+
 
 Create VPC:
 

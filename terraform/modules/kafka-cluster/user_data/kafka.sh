@@ -4,7 +4,7 @@
 id -u kafka >/dev/null 2>&1 || sudo useradd kafka
 
 # EBS volume
-lsblk   
+lsblk
 
 # Wait for volume to be available
 while [ ! -e /dev/xvdf ]; do
@@ -33,12 +33,12 @@ fi
 df -h /kafka
 
 # # create kafka directories
-test -d /kafka/data || mkdir -p  /kafka/data 
-test -d /kafka/etc  || mkdir -p  /kafka/etc 
+test -d /kafka/data || mkdir -p  /kafka/data
+test -d /kafka/etc  || mkdir -p  /kafka/etc
 #test -d /kafka/etc/ssl  || mkdir -p  /kafka/etc/ssl # No need, as the directory is included on the zipfile
 test -d /kafka/log  || mkdir -p  /kafka/log
 # # add permissions to kafka directory
-chown -R kafka:kafka /kafka 
+chown -R kafka:kafka /kafka
 
 # COPY SSL certificates from S3
 yum install -y python-pip
@@ -46,11 +46,5 @@ pip install awscli
 
 export DOM=${DOMAIN}
 
-cd /kafka/etc/
-# TEST IAM Role privilege to access S3 Bucket
-aws s3 ls terraform.$${DOM}
-# Copy ssl.zip file from S3
-aws s3 cp terraform.$${DOM}/$${DOM%%.*} .
-unzip ssl.zip
 
 sudo reboot

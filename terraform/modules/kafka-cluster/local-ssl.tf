@@ -4,10 +4,3 @@ resource "null_resource" "ssl" {
   }
 }
 
-
-resource "aws_s3_bucket_object" "ssl" {
-  bucket = "terraform.${var.domain}"
-  key    = "${element(split(".", var.domain),0)}/${var.env}/${var.ssl_zipfile}"
-  source = "${var.ssl_zipfile}"
-  server_side_encryption = "AES256"
-}

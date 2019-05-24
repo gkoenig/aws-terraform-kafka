@@ -23,7 +23,3 @@ output "kafka_elb_dns" {
 output "zk_elb_dns" {
   value = "${module.kafka.zk_elb_dns}"
 }
-
-output "s3-sink-bucket" {
-   value = "${module.kafka.s3-sink-bucket}"
-}
