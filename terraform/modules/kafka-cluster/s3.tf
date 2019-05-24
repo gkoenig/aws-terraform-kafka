@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "kafka_s3_bucket" {
     versioning {
             enabled = true
     }
-    tags {
+    tags = {
         Name = "kafka-s3-sink.${var.env}.${var.domain}"
     }
 }
@@ -55,7 +55,7 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
 EOF
 }
 #---------------------------------------------------------
-# Create an IAM role for the Kafka Nodes 
+# Create an IAM role for the Kafka Nodes
 #---------------------------------------------------------
 
 resource "aws_iam_role" "kafka" {

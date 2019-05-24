@@ -8,7 +8,7 @@ resource "aws_ebs_volume" "kafka" {
   lifecycle {
       prevent_destroy = true
   }
-  tags {
+  tags = {
     Name = "kafka-${count.index}-${var.env}.${var.domain}"
   }
 }

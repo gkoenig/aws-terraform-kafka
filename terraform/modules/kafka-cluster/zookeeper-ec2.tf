@@ -2,7 +2,7 @@ data "template_file" "zookeeper" {
   count    = "${var.nr_zk_nodes}"
   template = "${file("${path.module}/user_data/zookeeper.sh")}"
 
-  vars {
+  vars = {
     ZK_ID = "${count.index}"
     DOMAIN = "${var.domain}"
     ENV = "${var.env}"

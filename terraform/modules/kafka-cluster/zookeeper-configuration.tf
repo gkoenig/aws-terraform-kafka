@@ -2,7 +2,7 @@ data "template_file" "zookeeper_props" {
   count    = "${var.nr_zk_nodes}"
   template = "${file("configs/zookeeper.properties")}"
 
-  vars {
+  vars = {
     DOMAIN = "${var.domain}"
     ENV = "${var.env}"
   }
@@ -12,7 +12,7 @@ data "template_file" "zookeeper_service" {
   count    = "${var.nr_zk_nodes}"
   template = "${file("configs/zookeeper.service")}"
 
-  vars {
+  vars = {
     DOMAIN = "${var.domain}"
     ENV = "${var.env}"
     ZK_ID = "${count.index}"

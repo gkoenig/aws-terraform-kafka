@@ -2,7 +2,7 @@ data "template_file" "kafka_props" {
   count    = "${var.nr_kafka_nodes}"
   template = "${file("configs/kafka.properties")}"
 
-  vars {
+  vars = {
     BROKER_ID = "${count.index}"
     REGION = "${element(data.aws_availability_zones.all.names, count.index)}"
     DOMAIN = "${var.domain}"
@@ -121,7 +121,7 @@ data "template_file" "rest_props" {
   count    = "${var.nr_kafka_nodes}"
   template = "${file("configs/rest-proxy.properties")}"
 
-  vars {
+  vars = {
     BROKER_ID = "${count.index}"
     DOMAIN = "${var.domain}"
     ENV    =  "${var.env}"

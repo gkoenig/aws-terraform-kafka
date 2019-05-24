@@ -2,7 +2,7 @@ data "template_file" "kafka" {
   count    = "${var.nr_kafka_nodes}"
   template = "${file("${path.module}/user_data/kafka.sh")}"
 
-  vars {
+  vars = {
     BROKER_ID = "${count.index}"
     REGION = "${element(data.aws_availability_zones.all.names, count.index)}"
     DOMAIN = "${var.domain}"

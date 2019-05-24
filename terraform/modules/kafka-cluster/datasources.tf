@@ -6,7 +6,7 @@ data "aws_availability_zones" "all" {}
 # EXISTING VPC data source
 data "terraform_remote_state" "main" {
   backend = "s3"
-  config {
+  config = {
 
     bucket = "${var.vpc_state_bucket}"
     key    = "${var.vpc_state_key}"
