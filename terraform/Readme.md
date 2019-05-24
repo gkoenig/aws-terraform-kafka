@@ -28,7 +28,6 @@ This modules creates a VPC to host one or more Clusters
     ├── gateways.tf             # Internet and NAT Gateways 
     ├── inputs.tf               # Input variables for the module
     ├── outputs.tf              # Outputs variables for the module
-    ├── peering.tf              # Peering setup with connecting VPC 
     ├── secgroups.tf            # Security Groups 
     ├── subnets.tf              # Base Public Subnets for the VPC
     ├── terraform.tf            # Terraform version requirement
@@ -104,7 +103,6 @@ terraform init -from-module="../../../templates/vpc"
 Customize variables for VPC creation on _terraform.tfvars_:
 ```
 vpc_cidr="172.16.0.0/16"
-vpc_peer="vpc-88c0bde0" //VPC where Kubernetes runs
 domain="some.domain"
 name="integration"
 ```

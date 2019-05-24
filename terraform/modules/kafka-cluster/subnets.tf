@@ -31,13 +31,6 @@ resource "aws_route" "rt" {
   nat_gateway_id         = "${data.terraform_remote_state.main.natgw_id}"
 }
 
-# Route to Kubernetes VPC
-resource "aws_route" "rt_peer" {
-  route_table_id         = "${aws_route_table.rtb.id}"
-  destination_cidr_block = "${data.aws_vpc.peer.cidr_block}"
-  vpc_peering_connection_id = "${data.terraform_remote_state.main.peering_connection_id}"
-}
-
 resource "aws_route_table_association" "rta_public" {
   count          = "${length(data.aws_availability_zones.all.names)}"
   subnet_id      = "${element(aws_subnet.main.*.id,count.index)}"
@@ -72,15 +65,6 @@ resource "aws_security_group_rule" "kfk_ingress_any_any_self" {
   type              = "ingress"
 }
 
-// Allow TCP:22 (SSH)
-resource "aws_security_group_rule" "kfk_ingress_tcp_22_cidr" {
-  security_group_id = "${aws_security_group.kafka.id}"
-  from_port         = 22
-  to_port           = 22
-  protocol          = "tcp"
-  cidr_blocks       = ["${data.terraform_remote_state.main.bastion_ip_priv}/32" ,"${data.aws_vpc.peer.cidr_block}","${data.aws_vpc.main.cidr_block}"]
-  type              = "ingress"
-}
 
 // Allow TCP:6667 (Kafka broker 0.8.1.x)
 # resource "aws_security_group_rule" "kfk_ingress_tcp_6667_cidr" {
