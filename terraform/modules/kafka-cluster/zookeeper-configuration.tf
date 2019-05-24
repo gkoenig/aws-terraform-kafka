@@ -35,7 +35,7 @@ resource "null_resource" "zookeeper" {
     host = "${element(aws_instance.zookeeper.*.private_ip, count.index)}"
     private_key  = "${file("~/.ssh/gk-paris.pem")}"
     bastion_user = "${var.bastion_user}"
-    bastion_host = "${data.terraform_remote_state.main.bastion_dns}"
+    bastion_host = "${data.aws_instance.bastion-host.public_dns}"
     bastion_private_key = "${file("~/.ssh/gk-paris.pem")}"
     agent = false
   }

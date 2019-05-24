@@ -132,7 +132,7 @@ resource "null_resource" "rest_proxy" {
   depends_on = ["aws_volume_attachment.kafka","aws_route53_record.zookeeper"]
 
   count    = "${var.nr_kafka_nodes}"
-  triggers {
+  triggers ={
     #server_id = "${element(aws_instance.kafka.*.id, count.index)}",
     rest_properties = "${sha1(element(data.template_file.rest_props.*.rendered, count.index))}"
   }
