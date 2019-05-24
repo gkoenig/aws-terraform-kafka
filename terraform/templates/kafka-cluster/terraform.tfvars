@@ -9,7 +9,7 @@ domain="{{env}}.{{aws.domain}}"
 # Define Kafka EC2 Instance and Disk Sizes
 kafka_ec2_type="t2.xlarge"
 ami="ami-bfff49c2"
-kafka-disksize=50
+kafka-disksize=500
 kafka-disktype="st1"
 
 # VPC state location
