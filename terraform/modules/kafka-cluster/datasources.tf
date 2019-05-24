@@ -25,4 +25,14 @@ data "aws_vpc" "main" {
    }
 }
 
+data "aws_nat_gateway" "natgw" {
+  vpc_id = "${data.aws_vpc.main.id}"
+}
 
+data "aws_instance" "bastion-host" {
+
+  filter {
+    name   = "tag:Name"
+    values = ["bastion-kafka.development.scigility"]
+  }
+}

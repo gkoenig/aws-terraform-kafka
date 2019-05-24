@@ -44,7 +44,7 @@ resource "aws_instance" "kafka" {
     user = "centos"
     host = "${self.private_ip}"
     private_key  = "${file("~/.ssh/gk-paris.pem")}"
-    bastion_host = "${data.terraform_remote_state.main.bastion_dns}"
+    bastion_host = "${data.aws_instance.bastion-host.public_dns}"
     bastion_private_key = "${file("~/.ssh/gk-paris.pem")}"
     agent = false
   }

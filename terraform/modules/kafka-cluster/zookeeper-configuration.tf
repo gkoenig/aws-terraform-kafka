@@ -24,7 +24,7 @@ resource "null_resource" "zookeeper" {
 
   count    = "${var.nr_zk_nodes}"
 
-  triggers {
+  triggers = {
     #server_id = "${element(aws_instance.zookeeper.*.id, count.index)}"
     zk_properties = "${sha1(element(data.template_file.zookeeper_props.*.rendered, count.index))}"
     zk_service = "${sha1(element(data.template_file.zookeeper_service.*.rendered, count.index))}"

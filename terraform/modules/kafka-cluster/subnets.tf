@@ -28,7 +28,7 @@ resource "aws_route_table" "rtb" {
 resource "aws_route" "rt" {
   route_table_id         = "${aws_route_table.rtb.id}"
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = "${data.terraform_remote_state.main.natgw_id}"
+  nat_gateway_id         = "${data.aws_nat_gateway.natgw.id}"
 }
 
 resource "aws_route_table_association" "rta_public" {
