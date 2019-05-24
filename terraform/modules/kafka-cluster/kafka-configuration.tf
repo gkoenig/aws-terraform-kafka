@@ -14,7 +14,7 @@ resource "null_resource" "kafka" {
   depends_on = ["aws_volume_attachment.kafka","aws_route53_record.zookeeper","null_resource.zookeeper","null_resource.ssl"]
 
   count    = "${var.nr_kafka_nodes}"
-  triggers {
+  triggers ={
     #server_id = "${element(aws_instance.kafka.*.id, count.index)}",
     kafka_properties = "${sha1(element(data.template_file.kafka_props.*.rendered, count.index))}"
     prometheus_cfg = "${sha1(file("configs/kafka-prometheus.yml"))}"
@@ -26,7 +26,7 @@ resource "null_resource" "kafka" {
     host = "${element(aws_instance.kafka.*.private_ip, count.index)}"
     private_key  = "${file("~/.ssh/gk-paris.pem")}"
     bastion_user = "${var.bastion_user}"
-    bastion_host = "${data.terraform_remote_state.main.bastion_dns}"
+    bastion_host = "${data.aws_instance.bastion-host.public_dns}"
     bastion_private_key = "${file("~/.ssh/gk-paris.pem")}"
     agent = false
   }
@@ -83,7 +83,7 @@ resource "null_resource" "kafka-service" {
   depends_on = ["null_resource.kafka"]
 
   count    = "${var.nr_kafka_nodes}"
-  triggers {
+  triggers ={
     server_id = "${element(aws_instance.kafka.*.id, count.index)}"
     kafka_service_cfg = "${sha1(file("configs/kafka.service"))}"
   }
@@ -92,7 +92,7 @@ resource "null_resource" "kafka-service" {
     host = "${element(aws_instance.kafka.*.private_ip, count.index)}"
     private_key  = "${file("~/.ssh/gk-paris.pem")}"
     bastion_user = "${var.bastion_user}"
-    bastion_host = "${data.terraform_remote_state.main.bastion_dns}"
+    bastion_host = "${data.aws_instance.bastion-host.public_dns}"
     bastion_private_key = "${file("~/.ssh/gk-paris.pem")}"
     agent = false
   }
@@ -141,7 +141,7 @@ resource "null_resource" "rest_proxy" {
     host = "${element(aws_instance.kafka.*.private_ip, count.index)}"
     private_key  = "${file("~/.ssh/gk-paris.pem")}"
    bastion_user = "${var.bastion_user}"
-    bastion_host = "${data.terraform_remote_state.main.bastion_dns}"
+    bastion_host = "${data.aws_instance.bastion-host.public_dns}"
     bastion_private_key = "${file("~/.ssh/gk-paris.pem")}"
     agent = false
   }
