@@ -8,7 +8,7 @@ resource "aws_elb" "kafka" {
   internal           = true
   access_logs {
     bucket        	= "logs"
-    enabled 		= false 
+    enabled 		= false
   }
 
   listener {
@@ -59,7 +59,7 @@ resource "aws_elb" "kafka" {
   connection_draining         = true
   connection_draining_timeout = 400
 
-  tags {
+  tags  = {
     Name = "kafka-elb.${var.env}.${var.domain}"
   }
 }
@@ -75,7 +75,7 @@ resource "aws_elb" "zookeeper" {
 
   access_logs {
      bucket        	= "logs"
-     enabled 		= false 
+     enabled 		= false
   }
 
   listener {
@@ -106,7 +106,7 @@ resource "aws_elb" "zookeeper" {
   connection_draining         = true
   connection_draining_timeout = 400
 
-  tags {
+  tags  = {
     Name = "zk-elb.${var.env}.${var.domain}"
   }
 }

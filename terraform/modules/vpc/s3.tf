@@ -2,7 +2,7 @@
 #   bucket = "logs.kafka.${var.domain}"
 
 
-#   tags {
+#   tags  = {
 #     Name        = "logs.kafka.${var.domain}"
 #     Environment = "${var.domain}"
 #   }

@@ -66,7 +66,7 @@ resource "aws_instance" "kafka" {
     delete = "60m"
   }
 
-  tags {
+  tags  = {
     Name = "kafka-${count.index}.${var.env}.${var.domain}"
   }
 }
