@@ -35,7 +35,7 @@ variable "cidr_block_all" {
 }
 
 variable "keyname" {
-  default = "kafka"
+  default = "gk-paris"
 }
 
 variable "kafka-disksize" {
