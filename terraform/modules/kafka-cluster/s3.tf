@@ -18,7 +18,7 @@ resource "aws_s3_bucket" "kafka_s3_bucket" {
 #---------------------------------------------------------
 resource "aws_s3_bucket_policy" "bucket_policy" {
   count = "${var.s3sink ? 1 : 0}"
-  bucket = "${aws_s3_bucket.kafka_s3_bucket.id}"
+  bucket = "${aws_s3_bucket.kafka_s3_bucket[0].id}"
   policy = <<EOF
 {
     "Version": "2012-10-17",

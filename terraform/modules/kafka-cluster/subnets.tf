@@ -8,7 +8,7 @@ resource "aws_subnet" "main" {
   availability_zone       = "${element(data.aws_availability_zones.all.names, count.index)}"
   map_public_ip_on_launch = false
 
-  tags {
+  tags ={
     Name = "${var.env}.${var.domain}-${count.index}"
   }
 }
@@ -20,7 +20,7 @@ resource "aws_subnet" "main" {
 resource "aws_route_table" "rtb" {
   vpc_id = "${data.terraform_remote_state.main.vpc_id}"
 
-  tags {
+  tags ={
     Name = "${var.name}-internal-natgw"
   }
 }
@@ -57,7 +57,7 @@ resource "aws_security_group" "kafka" {
   description = "Kafka Security Group"
   vpc_id      = "${data.terraform_remote_state.main.vpc_id}"
 
-  tags {
+  tags ={
     Name = "${var.env}-kafka"
   }
 }
@@ -155,9 +155,9 @@ resource "aws_security_group_rule" "kfk_egress_allow_all_bastion" {
 resource "aws_security_group" "zookeeper" {
   name        = "${var.env}-zookeeper"
   description = "Zookeeper Security Group"
-  vpc_id      = "${data.terraform_remote_state.main.vpc_id}"
+  vpc_id      = "${data.aws_vpc.main.id}"
 
-  tags {
+  tags ={
     Name = "${var.env}-zookeeper"
   }
 }

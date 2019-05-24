@@ -23,10 +23,6 @@ output "zookeeper_fqdn_dns" {
   value = ["${aws_route53_record.zookeeper.*.fqdn}"]
 }
 
-output "bastion_dns" {
-  value = ["${data.terraform_remote_state.main.bastion_dns}"]
-}
-
 output "s3-sink-bucket" {
    value = "${join(" ",aws_s3_bucket.kafka_s3_bucket.*.bucket)}"
 }

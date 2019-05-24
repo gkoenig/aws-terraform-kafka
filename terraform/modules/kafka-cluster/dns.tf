@@ -24,14 +24,6 @@ resource "aws_route53_record" "zookeeper" {
    records = ["${element(aws_instance.kafka.*.private_ip, count.index)}"]
  }
 
-
-
-resource "aws_route53_zone_association" "k8s" {
-  zone_id = "${aws_route53_zone.kafka.zone_id}"
-  vpc_id  = "${data.terraform_remote_state.main.vpc_peer_id}"
-}
-
-
 #############################################################
 # Round Robin for zookeeper.<env.domain> for all zookeeper nodes
 #############################################################
