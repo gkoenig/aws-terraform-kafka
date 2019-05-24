@@ -3,8 +3,8 @@
 #############################################################
 resource "aws_elb" "kafka" {
   name               = "kafka-elb-${var.env}"
-  subnets            = ["${aws_subnet.main.*.id}"]
-  security_groups    = ["${aws_security_group.kafka.id}"]
+  subnets            = "${aws_subnet.main.*.id}"
+  security_groups    = []"${aws_security_group.kafka.id}"]
   internal           = true
   access_logs {
     bucket        	= "logs"
@@ -53,7 +53,7 @@ resource "aws_elb" "kafka" {
     interval            = 10
   }
 
-  instances                   = ["${aws_instance.kafka.*.id}"]
+  instances                   = "${aws_instance.kafka.*.id}"
   cross_zone_load_balancing   = true
   idle_timeout                = 400
   connection_draining         = true
@@ -69,7 +69,7 @@ resource "aws_elb" "kafka" {
 #############################################################
 resource "aws_elb" "zookeeper" {
   name               = "zk-elb-${var.env}"
-  subnets            = ["${aws_subnet.main.*.id}"]
+  subnets            = "${aws_subnet.main.*.id}"
   security_groups    = ["${aws_security_group.zookeeper.id}"]
   internal           = true
 
@@ -100,7 +100,7 @@ resource "aws_elb" "zookeeper" {
     interval            = 10
   }
 
-  instances                   = ["${aws_instance.zookeeper.*.id}"]
+  instances                   = "${aws_instance.zookeeper.*.id}"
   cross_zone_load_balancing   = true
   idle_timeout                = 400
   connection_draining         = true
