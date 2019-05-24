@@ -2,7 +2,7 @@
 ## Create Internet Gateway and NAT Gateway
 ################################################################################
 resource "aws_internet_gateway" "public" {
-  vpc_id = "${data.aws_vpc.main.id}"
+  vpc_id = "${aws_vpc.main.id}"
 
   tags = {
     Name = "${var.name}-igw.${var.domain}"
