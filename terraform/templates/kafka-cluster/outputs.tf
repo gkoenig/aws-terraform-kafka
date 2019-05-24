@@ -15,9 +15,6 @@ output "zookeeper_fqdn_dns" {
   value = ["${module.kafka.zookeeper_fqdn_dns}"]
 }
 
-output "bastion_dns" {
-  value = ["${module.kafka.bastion_dns}"]
-}
 
 output "kafka_elb_dns" {
   value = "${module.kafka.kafka_elb_dns}"

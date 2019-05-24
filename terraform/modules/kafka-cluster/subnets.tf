@@ -18,7 +18,7 @@ resource "aws_subnet" "main" {
 * ASSOCIATE SUBNETS TO ROUTE TABLE
 ****************************************************/
 resource "aws_route_table" "rtb" {
-  vpc_id = "${data.terraform_remote_state.main.vpc_id}"
+  vpc_id = "${data.aws_vpc.main.id}"
 
   tags ={
     Name = "${var.name}-internal-natgw"
@@ -55,7 +55,7 @@ resource "aws_route_table_association" "rta_public" {
 resource "aws_security_group" "kafka" {
   name        = "${var.env}-kafka"
   description = "Kafka Security Group"
-  vpc_id      = "${data.terraform_remote_state.main.vpc_id}"
+  vpc_id      = "${data.aws_vpc.main.id}"
 
   tags ={
     Name = "${var.env}-kafka"
@@ -172,15 +172,6 @@ resource "aws_security_group_rule" "zk_ingress_any_any_self" {
   type              = "ingress"
 }
 
-// Allow TCP:22 (SSH)
-resource "aws_security_group_rule" "zk_ingress_tcp_22_cidr" {
-  security_group_id = "${aws_security_group.zookeeper.id}"
-  from_port         = 22
-  to_port           = 22
-  protocol          = "tcp"
-  cidr_blocks       = ["${data.terraform_remote_state.main.bastion_ip_priv}/32" ,"${data.aws_vpc.peer.cidr_block}","${data.aws_vpc.main.cidr_block}"]
-  type              = "ingress"
-}
 
 // Allow TCP:2181 (Zookeeper)
 resource "aws_security_group_rule" "zk_ingress_tcp_2181_cidr" {

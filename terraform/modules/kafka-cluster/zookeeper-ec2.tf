@@ -42,7 +42,7 @@ resource "aws_instance" "zookeeper" {
     create_before_destroy = true
 }
 
-  tags {
+  tags ={
     Name = "zk-${count.index}.${var.env}.${var.domain}"
   }
 }
