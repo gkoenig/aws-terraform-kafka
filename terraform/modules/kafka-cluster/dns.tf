@@ -1,6 +1,6 @@
 resource "aws_route53_zone" "kafka" {
    name   = "${var.env}.${var.domain}"
-   vpc_id = "${data.terraform_remote_state.main.vpc_id}"
+   vpc_id = "${data.aws_vpc.main.id}"
 }
 
 

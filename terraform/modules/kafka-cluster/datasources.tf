@@ -15,9 +15,14 @@ data "terraform_remote_state" "main" {
 }
 
 data "aws_vpc" "main" {
-  tags {
-    Name = "kafka.scigility"
-  }
+  filter {
+     name = "tag-value"
+     values = ["kafka.scigility"]
+   }
+   filter {
+     name = "tag-key"
+     values = ["Name"]
+   }
 }
 
 
