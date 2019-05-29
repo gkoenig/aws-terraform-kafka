@@ -45,7 +45,7 @@ resource "aws_instance" "kafka" {
     host = "${self.private_ip}"
     private_key  = "${file("~/.ssh/gk-paris.pem")}"
     bastion_host = "${data.aws_instance.bastion-host.public_dns}"
-    bastion_private_key = "${file("~/.ssh/gk-paris.pem")}"
+    bastion_private_key = "${aws_key_pair.bastion_key.key_name}"
     agent = false
   }
 

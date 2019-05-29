@@ -25,3 +25,12 @@ data "aws_instance" "bastion-host" {
     values = ["bastion-kafka.development.scigility"]
   }
 }
+
+
+data "aws_key_pair" "bastion_key" {
+
+  filter {
+    name   = "tag:Name"
+    values = ["bastion-key"]
+  }
+}
