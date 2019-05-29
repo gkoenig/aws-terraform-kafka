@@ -27,10 +27,10 @@ data "aws_instance" "bastion-host" {
 }
 
 
-data "aws_key_pair" "bastion_key" {
-
-  filter {
-    name   = "tag:Name"
-    values = ["bastion-key"]
-  }
-}
+#data "aws_key_pair" "bastion_key" {
+#
+#  filter {
+#    name   = "tag:Name"
+#    values = ["bastion-key"]
+#  }
+#}
