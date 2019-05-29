@@ -91,9 +91,9 @@ resource "null_resource" "kafka-service" {
     user = "${var.ssh_user}"
     host = "${element(aws_instance.kafka.*.private_ip, count.index)}"
     private_key  = "${file("~/.ssh/gk-paris.pem")}"
-    bastion_user = "${var.bastion_user}"
-    bastion_host = "${data.aws_instance.bastion-host.public_dns}"
-    bastion_private_key = "${file("~/.ssh/gk-paris.pem")}"
+    #bastion_user = "${var.bastion_user}"
+    #bastion_host = "${data.aws_instance.bastion-host.public_dns}"
+    #bastion_private_key = "${file("~/.ssh/gk-paris.pem")}"
     agent = false
   }
 
@@ -142,7 +142,7 @@ resource "null_resource" "rest_proxy" {
     private_key  = "${file("~/.ssh/gk-paris.pem")}"
    bastion_user = "${var.bastion_user}"
     bastion_host = "${data.aws_instance.bastion-host.public_dns}"
-    bastion_private_key = "${file("~/.ssh/gk-paris.pem")}"
+    bastion_private_key = "${aws_key_pair.bastion_key.key_name}"
     agent = false
   }
   provisioner "file" {
