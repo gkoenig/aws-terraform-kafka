@@ -40,14 +40,14 @@ resource "aws_instance" "kafka" {
     delete_on_termination = true
   }
 
-  connection {
-    user = "centos"
-    host = "${self.private_ip}"
-    private_key  = "${file("~/.ssh/gk-paris.pem")}"
-    bastion_host = "${data.aws_instance.bastion-host.public_dns}"
-    bastion_private_key = "${file("~/.ssh/terraform-aws-kafka-bastion")}"
-    agent = false
-  }
+  #connection {
+  #  user = "centos"
+  #  host = "${self.private_ip}"
+  #  private_key  = "${file("~/.ssh/gk-paris.pem")}"
+  #  bastion_host = "${data.aws_instance.bastion-host.public_dns}"
+  #  bastion_private_key = "${file("~/.ssh/terraform-aws-kafka-bastion")}"
+  #  agent = false
+  #}
 
   provisioner "remote-exec" {
     when                  = "destroy"

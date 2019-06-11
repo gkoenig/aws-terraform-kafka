@@ -126,6 +126,16 @@ resource "aws_security_group_rule" "kfk_ingress_tcp_7071_cidr" {
   type              = "ingress"
 }
 
+// Allow ssh from local workstation
+resource "aws_security_group_rule" "kfk_ingress_tcp_22_cidr" {
+  security_group_id = "${aws_security_group.kafka.id}"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = "${var.my_ip_cidr}"
+  type              = "ingress"
+}
+
 // Allow TCP:ALL to Bastion Net (ALL)
 resource "aws_security_group_rule" "kfk_egress_allow_all_bastion" {
   security_group_id = "${aws_security_group.kafka.id}"
