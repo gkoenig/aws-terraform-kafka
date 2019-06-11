@@ -231,3 +231,13 @@ resource "aws_security_group_rule" "zk_egress_allow_all_internal" {
   cidr_blocks              = ["0.0.0.0/0"]
   type              = "egress"
 }
+
+// Allow ssh from local workstation
+resource "aws_security_group_rule" "zk_ingress_tcp_22_cidr" {
+  security_group_id = "${aws_security_group.zookeeper.id}"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = "${var.my_ip_cidr}"
+  type              = "ingress"
+}
