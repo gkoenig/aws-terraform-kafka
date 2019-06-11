@@ -34,9 +34,9 @@ resource "null_resource" "zookeeper" {
     user = "${var.ssh_user}"
     host = "${element(aws_instance.zookeeper.*.private_ip, count.index)}"
     private_key  = "${file("~/.ssh/gk-paris.pem")}"
-    bastion_user = "${var.bastion_user}"
-    bastion_host = "${data.aws_instance.bastion-host.public_dns}"
-    bastion_private_key = "${file("~/.ssh/terraform-aws-kafka-bastion")}"
+    #bastion_user = "${var.bastion_user}"
+    #bastion_host = "${data.aws_instance.bastion-host.public_dns}"
+    #bastion_private_key = "${file("~/.ssh/terraform-aws-kafka-bastion")}"
     agent = false
   }
   provisioner "file" {
