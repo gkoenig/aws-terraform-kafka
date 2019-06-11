@@ -6,10 +6,14 @@ resource "aws_ebs_volume" "kafka" {
   encrypted         = true
 
   lifecycle {
-      prevent_destroy = true
+      prevent_destroy = false
   }
   tags = {
     Name = "kafka-${count.index}-${var.env}.${var.domain}"
+    Customer = "Scigility"
+    Project = "Scigility internal"
+    Requestor = "GeKo"
+    ExpirationDate = "2019-12-31"
   }
 }
 

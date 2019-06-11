@@ -44,5 +44,9 @@ resource "aws_instance" "zookeeper" {
 
   tags ={
     Name = "zk-${count.index}.${var.env}.${var.domain}"
+    Customer = "Scigility"
+    Project = "Scigility internal"
+    Requestor = "GeKo"
+    ExpirationDate = "2019-12-31"
   }
 }

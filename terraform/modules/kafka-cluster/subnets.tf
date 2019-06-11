@@ -10,6 +10,10 @@ resource "aws_subnet" "main" {
 
   tags ={
     Name = "${var.env}.${var.domain}-${count.index}"
+    Customer = "Scigility"
+    Project = "Scigility internal"
+    Requestor = "GeKo"
+    ExpirationDate = "2019-12-31"
   }
 }
 
@@ -22,6 +26,10 @@ resource "aws_route_table" "rtb" {
 
   tags ={
     Name = "${var.name}-internal-natgw"
+    Customer = "Scigility"
+    Project = "Scigility internal"
+    Requestor = "GeKo"
+    ExpirationDate = "2019-12-31"
   }
 }
 
@@ -52,6 +60,10 @@ resource "aws_security_group" "kafka" {
 
   tags ={
     Name = "${var.env}-kafka"
+    Customer = "Scigility"
+    Project = "Scigility internal"
+    Requestor = "GeKo"
+    ExpirationDate = "2019-12-31"
   }
 }
 
@@ -65,16 +77,6 @@ resource "aws_security_group_rule" "kfk_ingress_any_any_self" {
   type              = "ingress"
 }
 
-
-// Allow TCP:6667 (Kafka broker 0.8.1.x)
-# resource "aws_security_group_rule" "kfk_ingress_tcp_6667_cidr" {
-#   security_group_id = "${aws_security_group.kafka.id}"
-#   from_port         = 6667
-#   to_port           = 6667
-#   protocol          = "tcp"
-#   cidr_blocks       = "${var.cidr_block_all}"
-#   type              = "ingress"
-# }
 
 // Allow TCP:9092 (Kafka broker 0.8.2+)
 resource "aws_security_group_rule" "kfk_ingress_tcp_9092_cidr" {
@@ -143,6 +145,10 @@ resource "aws_security_group" "zookeeper" {
 
   tags ={
     Name = "${var.env}-zookeeper"
+    Customer = "Scigility"
+    Project = "Scigility internal"
+    Requestor = "GeKo"
+    ExpirationDate = "2019-12-31"
   }
 }
 
