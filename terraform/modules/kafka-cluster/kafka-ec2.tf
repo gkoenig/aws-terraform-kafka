@@ -29,6 +29,7 @@ resource "aws_instance" "kafka" {
   key_name      = "${var.keyname}"
   subnet_id     = "${element(aws_subnet.main.*.id, count.index)}"
   vpc_security_group_ids = ["${aws_security_group.kafka.id}"]
+  associate_public_ip_address = true
   iam_instance_profile = ""
 
   user_data = "${element(data.template_cloudinit_config.kafka.*.rendered,count.index)}"

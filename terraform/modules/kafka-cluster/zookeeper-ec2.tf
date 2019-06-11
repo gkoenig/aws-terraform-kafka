@@ -29,6 +29,7 @@ resource "aws_instance" "zookeeper" {
   subnet_id              = "${element(aws_subnet.main.*.id, count.index)}"
   private_ip             = "${cidrhost(cidrsubnet(data.aws_vpc.main.cidr_block,8,length(data.aws_availability_zones.all.names) * var.stack_offset +count.index),251)}"
   vpc_security_group_ids = ["${aws_security_group.zookeeper.id}"]
+  associate_public_ip_address = true
 
   user_data = "${element(data.template_cloudinit_config.zookeeper.*.rendered,count.index)}"
 
