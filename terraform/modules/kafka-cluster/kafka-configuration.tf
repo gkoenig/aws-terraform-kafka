@@ -23,7 +23,7 @@ resource "null_resource" "kafka" {
   }
   connection {
     user = "${var.ssh_user}"
-    host = "${element(aws_instance.kafka.*.public_dns, count.index)}"
+    host = "${element(aws_instance.kafka.*.public_ip, count.index)}"
     private_key  = "${file("~/.ssh/gk-paris.pem")}"
     #bastion_user = "${var.bastion_user}"
     #bastion_host = "${data.aws_instance.bastion-host.public_dns}"

@@ -32,7 +32,7 @@ resource "null_resource" "zookeeper" {
   }
   connection {
     user = "${var.ssh_user}"
-    host = "${element(aws_instance.zookeeper.*.public_dns, count.index)}"
+    host = "${element(aws_instance.zookeeper.*.public_ip, count.index)}"
     private_key  = "${file("~/.ssh/gk-paris.pem")}"
     #bastion_user = "${var.bastion_user}"
     #bastion_host = "${data.aws_instance.bastion-host.public_dns}"
