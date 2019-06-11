@@ -65,3 +65,7 @@ variable "vpc_state_bucket" {
 
 variable "vpc_state_key" {
 }
+
+variable "my_ip_cidr" {
+  default = ["149.172.222.241/32"]
+}
