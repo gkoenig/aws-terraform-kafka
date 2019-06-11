@@ -11,7 +11,7 @@ resource "aws_route53_record" "zookeeper" {
    name    = "zk-${count.index}"
    type    = "A"
    ttl     = "300"
-   records = ["${element(aws_instance.zookeeper.*.private_ip, count.index)}"]
+   records = ["${element(flatten(aws_instance.zookeeper.*.private_ip), count.index)}"]
  }
 
  resource "aws_route53_record" "kafka" {
@@ -21,7 +21,7 @@ resource "aws_route53_record" "zookeeper" {
    name    = "kafka-${count.index}"
    type    = "A"
    ttl     = "300"
-   records = ["${element(aws_instance.kafka.*.private_ip, count.index)}"]
+   records = ["${element(flatten(aws_instance.kafka.*.private_ip), count.index)}"]
  }
 
 #############################################################
