@@ -8,5 +8,9 @@ resource "aws_vpc" "main" {
 
   tags = {
     Name = "kafka.${var.domain}"
+    Customer = "Scigility"
+    Project = "Scigility internal"
+    Requestor = "GeKo"
+    ExpirationDate = "2019-12-31"
   }
 }

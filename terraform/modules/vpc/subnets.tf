@@ -11,6 +11,10 @@ resource "aws_subnet" "public" {
 
   tags = {
     Name = "public.kafka.${var.domain}"
+    Customer = "Scigility"
+    Project = "Scigility internal"
+    Requestor = "GeKo"
+    ExpirationDate = "2019-12-31"
   }
 
   lifecycle {
@@ -32,6 +36,10 @@ resource "aws_route_table" "public" {
 
   tags = {
     Name = "igw.kafka.${var.domain}"
+    Customer = "Scigility"
+    Project = "Scigility internal"
+    Requestor = "GeKo"
+    ExpirationDate = "2019-12-31"
   }
 }
 

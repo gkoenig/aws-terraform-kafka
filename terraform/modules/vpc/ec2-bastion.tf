@@ -15,6 +15,10 @@ resource "aws_instance" "bastion" {
 
   tags = {
     Name = "bastion-kafka.${var.name}.${var.domain}"
+    Customer = "Scigility"
+    Project = "Scigility internal"
+    Requestor = "GeKo"
+    ExpirationDate = "2019-12-31"
   }
 }
 
